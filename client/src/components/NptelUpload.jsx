@@ -1,27 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
+import { Button } from "./ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function NptelUpload() {
-  const [dragActive, setDragActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
-  };
-
-  const handleDrop = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    const file = e.dataTransfer.files[0];
-    uploadFile(file);
-  };
+  const fileRef = useRef(null);
+  const { toast } = useToast();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -51,23 +36,30 @@ export default function NptelUpload() {
         }
       );
       console.log("File uploaded successfully!", response);
-      window.location.href = response.data.link;
+      toast({
+        title: "File uploaded successfully!",
+        description: "Friday, February 10, 2023 at 5:57 PM",
+      });
     } catch (error) {
+      toast({
+        title: "Error uploading file",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
       console.error("Error uploading file:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
+  const focusInput = (e) => {
+    e.preventDefault();
+    fileRef.current.click();
+  };
+
   return (
     <div className="flex items-center justify-center w-full h-full">
-      <form
-        className="bg-card p-8 rounded-lg"
-        onDragEnter={handleDrag}
-        onDragOver={handleDrag}
-        onDragLeave={handleDrag}
-        onDrop={handleDrop}
-      >
+      <form className="bg-card p-8 rounded-lg">
         <div className="mb-6 text-center">
           <div className="mb-4">
             <img
@@ -76,30 +68,18 @@ export default function NptelUpload() {
               className="mx-auto h-12 w-12"
             />
           </div>
-          <label
-            htmlFor="file-upload"
-            className="relative inline-block rounded-md bg-primary py-2 px-4 font-semibold text-primary-foreground focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-primary focus-within:ring-offset-2 hover:bg-indigo-primary"
-          >
-            <span>Upload NPTEL Certificate</span>
-            <input
-              id="file-upload"
-              name="file-upload"
-              type="file"
-              className="sr-only"
-              onChange={handleFileChange}
-              disabled={isLoading}
-            />
-          </label>
-          <p className="mt-2 text-secondary-foreground">or drag and drop</p>
-        </div>
-        <div
-          className={`border-2 border-dashed rounded-lg p-6 ${
-            dragActive ? "border-primary" : "border-secondary-foreground/40"
-          }`}
-        >
-          <p className="text-gray-600 dark:text-gray-400 text-center">
-            Drag & Drop your file here
-          </p>
+          <Button onClick={focusInput} disabled={isLoading}>
+            Upload your NPTEL certificate
+          </Button>
+          <input
+            id="file-upload"
+            name="file-upload"
+            type="file"
+            className="hidden"
+            onChange={handleFileChange}
+            disabled={isLoading}
+            ref={fileRef}
+          />
         </div>
         <p className="mt-4 text-xs text-gray-500 text-center">PDF up to 10MB</p>
       </form>

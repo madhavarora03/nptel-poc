@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, jsonify, send_file
+from flask_cors import CORS
 import os
 from pdf_qr_extractor import extract_link_from_pdf_qr_code
 import requests
@@ -13,6 +14,8 @@ from extractor import main
 
 
 app = Flask(__name__)
+CORS(app)
+
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 

@@ -7,7 +7,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Upload } from "lucide-react";
-import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import NptelUpload from "./NptelUpload";
 
@@ -55,9 +54,9 @@ export default function PendingRequest() {
               <TableCell className="flex items-center justify-center w-full">
                 <Dialog>
                   <DialogTrigger>
-                    <Button variant="ghost" className="hover:bg-primary/80">
+                    <span>
                       <Upload />
-                    </Button>
+                    </span>
                   </DialogTrigger>
                   <DialogContent>
                     <NptelUpload />
