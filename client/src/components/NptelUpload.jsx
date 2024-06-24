@@ -41,9 +41,13 @@ export default function NptelUpload() {
       );
       console.log("File uploaded successfully!", response);
       toast({
-        title: "File uploaded successfully!",
+        title: response.data.message,
         description: new Date().toLocaleTimeString(),
       });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       toast({
         title: "Error uploading file",
