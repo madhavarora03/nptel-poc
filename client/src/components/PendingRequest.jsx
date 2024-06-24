@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Upload } from "lucide-react";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import NptelUpload from "./NptelUpload";
 
 const data = [
@@ -53,6 +53,7 @@ export default function PendingRequest() {
               <TableCell className="text-center">{coordinator}</TableCell>
               <TableCell className="flex items-center justify-center w-full">
                 <Dialog>
+                  <DialogTitle></DialogTitle>
                   <DialogTrigger>
                     <span>
                       <Upload />
