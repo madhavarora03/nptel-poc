@@ -1,4 +1,11 @@
-import { Table } from "./ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./ui/table";
 
 const data = [
   {
@@ -54,5 +61,47 @@ const data = [
 ];
 
 export default function ValidatedRequest() {
-  return <Table></Table>;
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="text-center">Subject Code</TableHead>
+          <TableHead className="text-center">Subject Name</TableHead>
+          <TableHead className="text-center">Student Name</TableHead>
+          <TableHead className="text-center">Total Marks</TableHead>
+          <TableHead className="text-center">Result</TableHead>
+          <TableHead className="text-center">NSUT Roll No.</TableHead>
+          <TableHead className="text-center">NPTEL Roll No.</TableHead>
+          <TableHead className="text-center">Status</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.map(
+          ({
+            subject_code,
+            subject_name,
+            student_name,
+            total_marks,
+            result,
+            nsut_roll_no,
+            nptel_roll_no,
+            status,
+          }) => {
+            return (
+              <TableRow key={subject_code}>
+                <TableCell className="text-center">{subject_code}</TableCell>
+                <TableCell className="text-center">{subject_name}</TableCell>
+                <TableCell className="text-center">{student_name}</TableCell>
+                <TableCell className="text-center">{total_marks}</TableCell>
+                <TableCell className="text-center">{result}</TableCell>
+                <TableCell className="text-center">{nsut_roll_no}</TableCell>
+                <TableCell className="text-center">{nptel_roll_no}</TableCell>
+                <TableCell className="text-center">{status}</TableCell>
+              </TableRow>
+            );
+          }
+        )}
+      </TableBody>
+    </Table>
+  );
 }

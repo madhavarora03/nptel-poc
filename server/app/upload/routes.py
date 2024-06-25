@@ -23,7 +23,9 @@ def index():
         + ".pdf",
     )
     file.save(file_path)
-    print(f"File saved to {file_path}, subject code: {request.form['subject_code']}")
+    print(
+        f"File saved to {file_path}, subject code: {request.form['subject_code']} {request.form['student_name']} {request.form['nsut_roll_no']}"
+    )
 
     thread = threading.Thread(
         target=process_file_async,

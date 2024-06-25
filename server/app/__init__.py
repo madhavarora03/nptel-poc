@@ -18,4 +18,8 @@ def create_app(config_class=Config):
 
     app.register_blueprint(upload_bp, url_prefix="/upload")
 
+    from app.request import bp as request_bp
+
+    app.register_blueprint(request_bp, url_prefix="/request")
+
     return app
