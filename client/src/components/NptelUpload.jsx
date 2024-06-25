@@ -3,7 +3,8 @@ import axios from "axios";
 import { Button } from "./ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
-export default function NptelUpload() {
+// eslint-disable-next-line react/prop-types
+export default function NptelUpload({ subjectCode }) {
   const [isLoading, setIsLoading] = useState(false);
   const fileRef = useRef(null);
   const { toast } = useToast();
@@ -26,6 +27,7 @@ export default function NptelUpload() {
 
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("subject_code", subjectCode);
 
     setIsLoading(true);
 

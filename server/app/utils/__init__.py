@@ -3,7 +3,7 @@ from app.utils.downloader import download_verification_pdf
 from app.utils.verifier import verify_file as verify
 
 
-def process_file_async(file_path):
+def process_file_async(file_path, subject_code):
     verification_link = extract_link(file_path, 0)
     print("Verification Link:", verification_link)
 

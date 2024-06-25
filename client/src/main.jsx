@@ -9,12 +9,14 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
+import ValidationPage from "./pages/ValidationPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<App />}>
       <Route path="*" element={<div>404 not found!</div>} />
       <Route path="/" element={<HomePage />} />
+      <Route path="/validation" element={<ValidationPage />} />
     </Route>
   )
 );

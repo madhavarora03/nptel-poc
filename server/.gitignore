@@ -9,5 +9,4 @@ htmlcov/
 .tox/
 docs/_build/
 downloads/
-uploads/
 qr_code_image.png

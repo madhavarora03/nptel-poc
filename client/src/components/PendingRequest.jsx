@@ -60,7 +60,7 @@ export default function PendingRequest() {
                     </span>
                   </DialogTrigger>
                   <DialogContent>
-                    <NptelUpload />
+                    <NptelUpload subjectCode={subject_code} />
                   </DialogContent>
                 </Dialog>
               </TableCell>

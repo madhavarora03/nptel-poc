@@ -1,3 +1,4 @@
+import os
 from app.utils.extractor import extractor
 
 
@@ -24,5 +25,7 @@ def verify_file(file_name):
 
     if uploaded_roll_number != valid_roll_number:
         return "Roll number mismatch", 500
+
+    os.remove("./downloads/" + file_name)
 
     return "Verification successful", 200

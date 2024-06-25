@@ -1,5 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from app.extensions import db
+
 
 class Validation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -14,7 +15,7 @@ class Validation(db.Model):
     uploaded_file = db.Column(db.String(200))
     marks_obtained = db.Column(db.Float)
     result = db.Column(db.String(10), nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
     def __repr__(self):
         return f'<Submission "{self.subject_name}" by {self.student_name}>'
