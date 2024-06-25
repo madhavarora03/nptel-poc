@@ -22,4 +22,8 @@ def create_app(config_class=Config):
 
     app.register_blueprint(request_bp, url_prefix="/request")
 
+    from app.subject import bp as subject_bp
+
+    app.register_blueprint(subject_bp, url_prefix="/subject")
+
     return app

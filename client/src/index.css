@@ -60,3 +60,16 @@
     @apply text-4xl py-2;
   }
 }
+
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: rotate360 3s linear infinite;
+}

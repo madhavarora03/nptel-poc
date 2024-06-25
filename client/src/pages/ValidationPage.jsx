@@ -1,4 +1,5 @@
 import AssignedSubjects from "@/components/AssignedSubjects";
+import NewSubjectForm from "@/components/NewSubjectForm";
 // import ValidatedRequest from "@/components/ValidatedRequest";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +20,9 @@ export default function ValidationPage() {
           <DialogTrigger>
             <Button>New Request</Button>
           </DialogTrigger>
-          <DialogContent>hejfhs</DialogContent>
+          <DialogContent>
+            <NewSubjectForm />
+          </DialogContent>
         </Dialog>
       </div>
     </div>

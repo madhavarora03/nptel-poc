@@ -1,3 +1,4 @@
+import { Check, Timer, X } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -16,7 +17,7 @@ const data = [
     result: "Pass",
     nsut_roll_no: "NSUT1234",
     nptel_roll_no: "NPTEL5678",
-    status: "Active",
+    status: "verified",
   },
   {
     subject_code: "EONH017",
@@ -26,7 +27,7 @@ const data = [
     result: "Pass",
     nsut_roll_no: "NSUT5678",
     nptel_roll_no: "NPTEL9876",
-    status: "Active",
+    status: "pending",
   },
   {
     subject_code: "EONH018",
@@ -36,7 +37,7 @@ const data = [
     result: "Pass",
     nsut_roll_no: "NSUT2468",
     nptel_roll_no: "NPTEL5432",
-    status: "Active",
+    status: "verified",
   },
   {
     subject_code: "EONH019",
@@ -46,7 +47,7 @@ const data = [
     result: "Fail",
     nsut_roll_no: "NSUT7890",
     nptel_roll_no: "NPTEL1357",
-    status: "Inactive",
+    status: "not verified",
   },
   {
     subject_code: "EONH020",
@@ -56,7 +57,7 @@ const data = [
     result: "Pass",
     nsut_roll_no: "NSUT1010",
     nptel_roll_no: "NPTEL2020",
-    status: "Active",
+    status: "pending",
   },
 ];
 
@@ -65,13 +66,11 @@ export default function ValidatedRequest() {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="text-center">Subject Code</TableHead>
-          <TableHead className="text-center">Subject Name</TableHead>
           <TableHead className="text-center">Student Name</TableHead>
-          <TableHead className="text-center">Total Marks</TableHead>
-          <TableHead className="text-center">Result</TableHead>
           <TableHead className="text-center">NSUT Roll No.</TableHead>
           <TableHead className="text-center">NPTEL Roll No.</TableHead>
+          <TableHead className="text-center">Total Marks</TableHead>
+          <TableHead className="text-center">Result</TableHead>
           <TableHead className="text-center">Status</TableHead>
         </TableRow>
       </TableHeader>
@@ -79,24 +78,29 @@ export default function ValidatedRequest() {
         {data.map(
           ({
             subject_code,
-            subject_name,
             student_name,
-            total_marks,
-            result,
             nsut_roll_no,
             nptel_roll_no,
+            total_marks,
+            result,
             status,
           }) => {
             return (
               <TableRow key={subject_code}>
-                <TableCell className="text-center">{subject_code}</TableCell>
-                <TableCell className="text-center">{subject_name}</TableCell>
                 <TableCell className="text-center">{student_name}</TableCell>
-                <TableCell className="text-center">{total_marks}</TableCell>
-                <TableCell className="text-center">{result}</TableCell>
                 <TableCell className="text-center">{nsut_roll_no}</TableCell>
                 <TableCell className="text-center">{nptel_roll_no}</TableCell>
-                <TableCell className="text-center">{status}</TableCell>
+                <TableCell className="text-center">{total_marks}</TableCell>
+                <TableCell className="text-center">{result}</TableCell>
+                <TableCell className="flex items-center justify-center w-full">
+                  {status === "verified" ? (
+                    <Check className="text-green-500 h-8 w-auto" />
+                  ) : status === "not verified" ? (
+                    <X className="text-red-500 h-8 w-auto" />
+                  ) : (
+                    <Timer className="text-blue-500 h-8 w-auto" />
+                  )}
+                </TableCell>
               </TableRow>
             );
           }
