@@ -57,7 +57,7 @@
     @apply bg-background text-foreground;
   }
   h1 {
-    @apply text-4xl py-2;
+    @apply text-3xl py-2;
   }
 }
 

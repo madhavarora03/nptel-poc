@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { Button } from "./ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { studentData } from "@/lib/student-data";
+// import { studentData } from "@/lib/student-data";
 
 // eslint-disable-next-line react/prop-types
 export default function NptelUpload({ subjectCode }) {
@@ -31,11 +31,13 @@ export default function NptelUpload({ subjectCode }) {
     formData.append("subject_code", subjectCode);
     formData.append(
       "student_name",
-      studentData[Math.floor(Math.random() * studentData.length)].student_name
+      // studentData[Math.floor(Math.random() * studentData.length)].student_name
+      "Deepak Kumar Mandal"
     );
     formData.append(
       "nsut_roll_no",
-      studentData[Math.floor(Math.random() * studentData.length)].nsut_roll_no
+      // studentData[Math.floor(Math.random() * studentData.length)].nsut_roll_no
+      "2021UCS1508"
     );
 
     setIsLoading(true);

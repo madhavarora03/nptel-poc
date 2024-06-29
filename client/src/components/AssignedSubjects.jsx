@@ -9,37 +9,23 @@ import {
   TableRow,
 } from "./ui/table";
 import { Link } from "react-router-dom";
-const data = [
-  {
-    subject_code: "EONH016",
-    subject_name: "Wildlife Ecology",
-    due_date: "12/12/2021",
-    total_students: 50,
-    verified: 30,
-    not_verified: 10,
-    not_submitted: 10,
-  },
-  {
-    subject_code: "EONH017",
-    subject_name: "Marine Biology",
-    due_date: "12/12/2021",
-    total_students: 50,
-    verified: 30,
-    not_verified: 10,
-    not_submitted: 10,
-  },
-  {
-    subject_code: "EONH018",
-    subject_name: "Botany and Plant Physiology",
-    due_date: "12/12/2021",
-    total_students: 50,
-    verified: 30,
-    not_verified: 10,
-    not_submitted: 10,
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function AssignedSubjects() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:5000/request");
+        console.log(response.data);
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <Table>
       <TableHeader>

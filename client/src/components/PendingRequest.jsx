@@ -9,35 +9,52 @@ import {
 import { Upload } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import NptelUpload from "./NptelUpload";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const data = [
-  {
-    subject_code: "EONH016",
-    subject_name: "Wildlife Ecology",
-    coordinator: "Dr. Gaurav Singhal",
-    due_date: "12/03/24",
-  },
-  {
-    subject_code: "EONH017",
-    subject_name: "Marine Biology",
-    coordinator: "Dr. Sarah Johnson",
-    due_date: "23/11/24",
-  },
-  {
-    subject_code: "EONH018",
-    subject_name: "Botany and Plant Physiology",
-    coordinator: "Dr. Emily Wong",
-    due_date: "16/06/24",
-  },
-  {
-    subject_code: "EONH019",
-    subject_name: "Zoology: Vertebrates",
-    coordinator: "Dr. Michael Brown",
-    due_date: "27/08/24",
-  },
-];
+// const data = [
+//   {
+//     subject_code: "EONH016",
+//     subject_name: "Wildlife Ecology",
+//     coordinator: "Dr. Gaurav Singhal",
+//     due_date: "12/03/24",
+//   },
+//   {
+//     subject_code: "EONH017",
+//     subject_name: "Marine Biology",
+//     coordinator: "Dr. Sarah Johnson",
+//     due_date: "23/11/24",
+//   },
+//   {
+//     subject_code: "EONH018",
+//     subject_name: "Botany and Plant Physiology",
+//     coordinator: "Dr. Emily Wong",
+//     due_date: "16/06/24",
+//   },
+//   {
+//     subject_code: "EONH019",
+//     subject_name: "Zoology: Vertebrates",
+//     coordinator: "Dr. Michael Brown",
+//     due_date: "27/08/24",
+//   },
+// ];
 
 export default function PendingRequest() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/student?roll_no=2021UCS1508"
+        );
+        console.log(response.data);
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <Table>
       <TableHeader>

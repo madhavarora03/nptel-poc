@@ -28,4 +28,9 @@ def verify_file(file_name):
 
     os.remove("./downloads/" + file_name)
 
-    return "Verification successful", 200
+    return (
+        "Verification successful",
+        200,
+        valid_roll_number,
+        valid_total_marks,
+    )

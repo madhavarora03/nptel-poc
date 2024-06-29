@@ -8,17 +8,22 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import HomePage from "./pages/HomePage.jsx";
-import ValidationPage from "./pages/ValidationPage.jsx";
-import SubjectPage from "./pages/SubjectPage.jsx";
+import StudentHomePage from "./pages/student/HomePage.jsx";
+import ValidationPage from "./pages/faculty/ValidationPage.jsx";
+import SubjectPage from "./pages/faculty/SubjectPage.jsx";
+import SignInPage from "./pages/student/SignInPage.jsx";
+import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<App />}>
       <Route path="*" element={<div>404 not found!</div>} />
-      <Route path="/" element={<HomePage />} />
-      <Route path="/validation" element={<ValidationPage />} />
-      <Route path="/validation/:subject_code" element={<SubjectPage />} />
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/" element={<StudentHomePage />} />
+        <Route path="/validation" element={<ValidationPage />} />
+        <Route path="/validation/:subject_code" element={<SubjectPage />} />
+      </Route>
+      <Route path="/auth" element={<SignInPage />} />
     </Route>
   )
 );

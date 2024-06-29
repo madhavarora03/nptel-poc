@@ -1,6 +1,5 @@
 import AssignedSubjects from "@/components/AssignedSubjects";
 import NewSubjectForm from "@/components/NewSubjectForm";
-// import ValidatedRequest from "@/components/ValidatedRequest";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

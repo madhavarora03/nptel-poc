@@ -27,26 +27,26 @@ export default function NewSubjectForm() {
     <div>
       <h1>Add Subject</h1>
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <div>
+        <div className="space-y-1">
           <Label htmlFor="subject_code">Subject Code</Label>
           <Input id="subject_code" name="subject_code" type="text" />
         </div>
-        <div>
+
+        <div className="space-y-1">
           <Label htmlFor="subject_name">Subject Name</Label>
           <Input id="subject_name" name="subject_name" type="text" />
         </div>
-        {/* <div>
-          <Label htmlFor="coordinator">Coordinator</Label>
-          <Input id="coordinator" name="coordinator" type="text" />
-        </div> */}
-        <div>
+
+        <div className="space-y-1">
           <Label htmlFor="due_date">Due Date</Label>
           <Input id="due_date" name="due_date" type="date" />
         </div>
-        {/* <div>
-          <Label htmlFor="csv_file">Students</Label>
+
+        <div className="space-y-1">
+          <Label htmlFor="csv_file">Students List (upload a csv file)</Label>
           <Input id="csv_file" name="csv_file" type="file" />
-        </div> */}
+        </div>
+
         <Button type="submit" className="w-full">
           Submit
         </Button>

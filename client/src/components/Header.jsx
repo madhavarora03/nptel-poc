@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,10 +25,7 @@ export default function Header() {
         scrolled && "shadow-2xl"
       }`}
     >
-      <Link to="/" className="text-2xl flex items-center gap-x-2">
-        <img src="/logo.svg" alt="" className="h-[6dvh]" />
-        Nptel Validator
-      </Link>
+      <Logo />
     </header>
   );
 }
