@@ -10,12 +10,12 @@ export default function NewSubjectForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    formData.append("coordinator", "Dr. John Doe");
 
     try {
       await axios.post("http://localhost:5000/subject", formData);
     } catch (error) {
       console.error(error);
+
       toast({
         title: "Error",
         description: "Failed to add subject",

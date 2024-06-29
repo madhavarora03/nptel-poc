@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import useAuth from "@/context/AuthContext";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   const { logout } = useAuth();
 
@@ -30,7 +32,13 @@ export default function Header() {
       }`}
     >
       <Logo />
-      <Button variant="destructive" onClick={logout}>
+      <Button
+        variant="destructive"
+        onClick={() => {
+          logout();
+          navigate("/auth");
+        }}
+      >
         Logout
       </Button>
     </header>

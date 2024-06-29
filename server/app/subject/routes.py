@@ -1,24 +1,24 @@
 from app.subject import bp
 from flask import request, jsonify
-from app.utils.csv_reader import read_csv_to_list as csv_reader
-import os
 import threading
 from app.utils import process_csv_upload
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 @bp.route("/", methods=["POST"])
+@jwt_required
 def index():
-    print(
-        request.form["subject_code"],
-        request.form["subject_name"],
-        request.form["due_date"],
-        request.form["coordinator"],
-        request.files["csv_file"],
-    )
+    current_user = get_jwt_identity()
+
+    if current_user["role"] != "teacher":
+        return jsonify({"message": "Not a teacher"}), 403
+
     file = request.files["csv_file"]
+    
     subject_code = request.form["subject_code"]
     subject_name = request.form["subject_name"]
-    course_coordinator = request.form["coordinator"]
+    course_coordinator = current_user["id"]
+    due_date = request.form["due_date"]
 
     file_name = request.files["csv_file"].filename
 
@@ -31,6 +31,7 @@ def index():
             subject_code,
             subject_name,
             course_coordinator,
+            due_date,
         ),
     )
     thread.start()

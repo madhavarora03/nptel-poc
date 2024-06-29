@@ -15,10 +15,6 @@ jwt.init_app(app)
 
 os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
-# from app.upload import bp as upload_bp
-
-# app.register_blueprint(upload_bp, url_prefix="/upload")
-
 from app.student import bp as student_bp
 
 app.register_blueprint(student_bp, url_prefix="/student")
@@ -49,12 +45,3 @@ def get_current_user():
             "teacher_id": current_user["teacher_id"],
         }
     )
-
-
-# from app.request import bp as request_bp
-
-# app.register_blueprint(request_bp, url_prefix="/request")
-
-# from app.subject import bp as subject_bp
-
-# app.register_blueprint(subject_bp, url_prefix="/subject")

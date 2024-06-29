@@ -41,20 +41,8 @@ import axios from "axios";
 
 export default function PendingRequest() {
   const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:5000/student?roll_no=2021UCS1508"
-  //       );
-  //       console.log(response.data);
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
+  // TODO: Fetch data from api
+
   return (
     <Table>
       <TableHeader>

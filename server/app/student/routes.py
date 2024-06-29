@@ -51,9 +51,11 @@ def login_student():
         return jsonify({"message": "Invalid credentials"}), 401
     access_token = create_access_token(
         identity={
+            # "id": student.id,
             "email": student.email,
             "role": "student",
             "student_id": student.nsut_roll_number,
+            "name": student.name,
         }
     )
     return jsonify({"access_token": access_token}), 200

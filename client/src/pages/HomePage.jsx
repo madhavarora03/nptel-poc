@@ -7,12 +7,13 @@ import {
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@radix-ui/react-dialog";
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import NewSubjectForm from "@/components/NewSubjectForm";
 
 export default function HomePage() {
   const { user } = useAuth();
+
   if (user && user.role === "student") {
     return (
       <div className="h-full w-full">
@@ -25,7 +26,7 @@ export default function HomePage() {
   }
   return (
     <div>
-      <h1>Alloted Subjects</h1>
+      <h1 className="underline">Alloted Subjects</h1>
       <AssignedSubjects />
       <div className="flex justify-center items-center py-4">
         <Dialog>

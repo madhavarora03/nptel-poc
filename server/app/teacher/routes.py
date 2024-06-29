@@ -9,6 +9,7 @@ from flask_jwt_extended import create_access_token
 @bp.route("/register", methods=["POST"])
 def register_teacher():
     data = request.get_json()
+
     existing_teacher = Teacher.query.filter_by(email=data["email"]).first()
     if existing_teacher:
         return jsonify({"error": "Email already exists"}), 400
@@ -26,6 +27,7 @@ def register_teacher():
     )
     db.session.add(new_teacher)
     db.session.commit()
+
     return (
         jsonify(
             {
@@ -47,11 +49,14 @@ def login_teacher():
     teacher = Teacher.query.filter_by(email=data["email"]).first()
     if not teacher or not check_password_hash(teacher.password, data["password"]):
         return jsonify({"message": "Invalid credentials"}), 401
+
     access_token = create_access_token(
         identity={
+            # "id": teacher.id,
             "email": teacher.email,
             "role": "teacher",
             "teacher_id": teacher.teacher_id,
+            "name": teacher.name,
         }
     )
     return jsonify({"access_token": access_token}), 200

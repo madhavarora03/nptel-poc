@@ -12,57 +12,11 @@ import NptelUpload from "./NptelUpload";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-// const data = [
-//   {
-//     subject_code: "EONH016",
-//     subject_name: "Wildlife Ecology",
-//     coordinator: "Dr. Gaurav Singhal",
-//     status: "not verified",
-//     submitted_on: "12/03/24",
-//     due_date: "12/03/24",
-//   },
-//   {
-//     subject_code: "EONH017",
-//     subject_name: "Marine Biology",
-//     coordinator: "Dr. Sarah Johnson",
-//     status: "verified",
-//     submitted_on: "23/11/24",
-//     due_date: "23/11/24",
-//   },
-//   {
-//     subject_code: "EONH018",
-//     subject_name: "Botany and Plant Physiology",
-//     coordinator: "Dr. Emily Wong",
-//     status: "verified",
-//     submitted_on: "16/06/24",
-//     due_date: "16/06/24",
-//   },
-//   {
-//     subject_code: "EONH019",
-//     subject_name: "Zoology: Vertebrates",
-//     coordinator: "Dr. Michael Brown",
-//     status: "verified",
-//     submitted_on: "27/08/24",
-//     due_date: "27/08/24",
-//   },
-// ];
 
 export default function CompletedRequest() {
   const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:5000/student/complete?roll_no=2021UCS1508"
-  //       );
-  //       console.log(response.data);
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, []);
+  // TODO: Fetch data from api
+
   return (
     <Table>
       <TableHeader>

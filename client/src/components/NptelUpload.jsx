@@ -29,20 +29,11 @@ export default function NptelUpload({ subjectCode }) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("subject_code", subjectCode);
-    formData.append(
-      "student_name",
-      // studentData[Math.floor(Math.random() * studentData.length)].student_name
-      "Deepak Kumar Mandal"
-    );
-    formData.append(
-      "nsut_roll_no",
-      // studentData[Math.floor(Math.random() * studentData.length)].nsut_roll_no
-      "2021UCS1508"
-    );
 
     setIsLoading(true);
 
     try {
+      // TODO: POST data to backend
       const response = await axios.post(
         "http://localhost:5000/upload",
         formData,
