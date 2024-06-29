@@ -12,27 +12,32 @@ import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 
 // eslint-disable-next-line react/prop-types
-export default function LoginForm({ onSubmit, description }) {
-  const [visible, setVisible] = useState(false);
+export default function LoginForm({ onSubmit, description, fields }) {
+  const [PassVisible, setPassVisible] = useState(false);
+  const [ConfirmVisible, setConfirmVisible] = useState(false);
   const { register, handleSubmit } = useForm();
 
   return (
-    <Card className="min-w-96 items-center text-center shadow-lg">
+    <Card className="min-w-96 items-center text-center shadow-lg bg-card">
       <CardHeader className="py-8">
-        <CardTitle>Login</CardTitle>
+        <CardTitle>Register</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit(onSubmit)} method="POST">
         <CardContent className="space-y-6">
-          <Input
-            type="text"
-            name="email"
-            placeholder="Email"
-            {...register("email", { required: true })}
-          />
+          {/* eslint-disable-next-line react/prop-types */}
+          {fields.map(({ name, placeholder }, index) => (
+            <Input
+              key={index}
+              type="text"
+              name={name}
+              placeholder={placeholder}
+              {...register(name, { required: true })}
+            />
+          ))}
           <div className="w-full flex space-x-2 items-center">
             <Input
-              type={visible ? "text" : "password"}
+              type={PassVisible ? "text" : "password"}
               name="password"
               placeholder="Password"
               {...register("password", { required: true })}
@@ -40,9 +45,24 @@ export default function LoginForm({ onSubmit, description }) {
             <Button
               type="button"
               variant="secondary"
-              onClick={() => setVisible((prev) => !prev)}
+              onClick={() => setPassVisible((prev) => !prev)}
             >
-              {visible ? <EyeOff /> : <EyeIcon />}
+              {PassVisible ? <EyeOff /> : <EyeIcon />}
+            </Button>
+          </div>
+          <div className="w-full flex space-x-2 items-center">
+            <Input
+              type={ConfirmVisible ? "text" : "password"}
+              name="confirm_password"
+              placeholder="Confirm Password"
+              {...register("password", { required: true })}
+            />
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setConfirmVisible((prev) => !prev)}
+            >
+              {ConfirmVisible ? <EyeOff /> : <EyeIcon />}
             </Button>
           </div>
           <Button type="submit" variant="default" className="w-full">

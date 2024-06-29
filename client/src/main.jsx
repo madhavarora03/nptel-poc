@@ -9,10 +9,13 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import StudentHomePage from "./pages/student/HomePage.jsx";
-import ValidationPage from "./pages/faculty/ValidationPage.jsx";
-import SubjectPage from "./pages/faculty/SubjectPage.jsx";
-import SignInPage from "./pages/student/SignInPage.jsx";
+import ValidationPage from "./pages/teacher/ValidationPage.jsx";
+import SubjectPage from "./pages/teacher/SubjectPage.jsx";
+import SignInPage from "./pages/SignInPage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import AuthOutlet from "./components/AuthOutlet.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,13 +26,18 @@ const router = createBrowserRouter(
         <Route path="/validation" element={<ValidationPage />} />
         <Route path="/validation/:subject_code" element={<SubjectPage />} />
       </Route>
-      <Route path="/auth" element={<SignInPage />} />
+      <Route element={<AuthOutlet />}>
+        <Route path="/auth" element={<SignInPage />} />
+        <Route path="/auth/register" element={<SignUpPage />} />
+      </Route>
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

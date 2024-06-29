@@ -13,21 +13,21 @@ import { useParams } from "react-router-dom";
 
 export default function ValidatedRequest() {
   const [data, setData] = useState([]);
-  const { subject_code } = useParams();
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/request/${subject_code}`
-        );
-        console.log(response.data);
-        setData(response.data.requests);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, [subject_code]);
+  // const { subject_code } = useParams();
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:5000/request/${subject_code}`
+  //       );
+  //       console.log(response.data);
+  //       setData(response.data.requests);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, [subject_code]);
   return (
     <Table>
       <TableHeader>
