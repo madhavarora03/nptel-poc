@@ -42,7 +42,20 @@ import axios from "axios";
 export default function PendingRequest() {
   const [data, setData] = useState([]);
   // TODO: Fetch data from api
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/request/${subject_code}`
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
+    fetchData();
+  }, [subject_code]);
   return (
     <Table>
       <TableHeader>
