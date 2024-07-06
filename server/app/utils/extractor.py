@@ -23,6 +23,10 @@ def extractor(pdf_path):
     total_marks = lines[9].strip()
     roll_no = lines[11].strip()
 
+    if len(lines) != 12:
+        print("Invalid PDF")
+        return None
+
     return (
         course_name,
         student_name,

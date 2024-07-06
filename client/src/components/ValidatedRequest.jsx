@@ -8,26 +8,26 @@ import {
   TableRow,
 } from "./ui/table";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import axiosInstance from "@/lib/axiosConfig";
 
 export default function ValidatedRequest() {
   const [data, setData] = useState([]);
-  // const { subject_code } = useParams();
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await axios.get(
-  //         `http://localhost:5000/request/${subject_code}`
-  //       );
-  //       console.log(response.data);
-  //       setData(response.data.requests);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchData();
-  // }, [subject_code]);
+  const { subject_code } = useParams();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axiosInstance.get(
+          `/teacher/request/${subject_code}`
+        );
+        console.log(response.data);
+        setData(response.data.requests);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, [subject_code]);
   return (
     <Table>
       <TableHeader>
@@ -65,11 +65,13 @@ export default function ValidatedRequest() {
                 <TableCell className="text-center">
                   {total_marks || "-"}
                 </TableCell>
-                <TableCell className="text-center">{result}</TableCell>
+                <TableCell className="text-center capitalize">
+                  {result}
+                </TableCell>
                 <TableCell className="flex items-center justify-center w-full">
                   {status === "verified" ? (
                     <Check className="text-green-500 h-8 w-auto" />
-                  ) : status === "not verified" ? (
+                  ) : status === "not_verified" ? (
                     <X className="text-red-500 h-8 w-auto" />
                   ) : (
                     <Timer className="text-blue-500 h-8 w-auto" />

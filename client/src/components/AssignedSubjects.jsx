@@ -10,22 +10,23 @@ import {
 } from "./ui/table";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "@/lib/axiosConfig";
 
 export default function AssignedSubjects() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/request");
-        console.log(response.data);
-        setData(response.data);
+        const response = await axiosInstance.get(`/teacher/alloted-subjects`);
+        setData(response.data.subjects);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching data:", error);
       }
-    }
+    };
+
     fetchData();
   }, []);
+
   return (
     <Table>
       <TableHeader>
@@ -61,7 +62,7 @@ export default function AssignedSubjects() {
                 <TableCell className="text-center">{not_verified}</TableCell>
                 <TableCell className="text-center">{not_submitted}</TableCell>
                 <TableCell className="text-center">
-                  <Link to={`/validation/${subject_code}`}>
+                  <Link to={`/${subject_code}`}>
                     <Button className="bg-[#4a8fff]">
                       <ArrowRight />
                     </Button>

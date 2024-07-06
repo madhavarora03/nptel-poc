@@ -1,15 +1,33 @@
 import LoginForm from "@/components/LoginForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useAuth from "@/context/AuthContext";
+import { useToast } from "./ui/use-toast";
 export default function TabsChange() {
   const { login } = useAuth();
+  const { toast } = useToast();
+
   const studentLogin = async ({ email, password }) => {
-    const res = await login(email, password, "student");
-    console.log(res);
+    try {
+      await login(email, password, "student");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.response.data.message,
+        variant: "destructive",
+      });
+    }
   };
 
   const teacherLogin = async ({ email, password }) => {
-    await login(email, password, "teacher");
+    try {
+      await login(email, password, "teacher");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.response.data.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (

@@ -26,7 +26,7 @@ const router = createBrowserRouter(
       </Route>
       <Route element={<AuthOutlet />}>
         <Route path="/auth" element={<SignInPage />} />
-        <Route path="/auth/register" element={<SignUpPage />} />
+        <Route path="/register" element={<SignUpPage />} />
       </Route>
     </Route>
   )

@@ -42,8 +42,13 @@ class StudentSubject(db.Model):
         default="pending",
         nullable=False,
     )
-    result = db.Column(db.Enum("passed", "failed", name="result_enum"), nullable=False)
-    total_marks = db.Column(db.Integer, nullable=False)
+    result = db.Column(
+        db.Enum("passed", "failed", "pending", name="result_enum"), nullable=False
+    )
+
+    nptel_roll_number = db.Column(db.String)
+
+    total_marks = db.Column(db.Integer)
 
     student = db.relationship(
         "Student", backref=db.backref("student_subjects", lazy=True)

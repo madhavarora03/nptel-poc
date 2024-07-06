@@ -5,11 +5,13 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export default function LoginForm({ onSubmit, description }) {
@@ -48,20 +50,17 @@ export default function LoginForm({ onSubmit, description }) {
           <Button type="submit" variant="default" className="w-full">
             Submit
           </Button>
-          {/* <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t"></span>
-            </div>
-            <span className="relative p-2 font-semibold bg-card">or</span>
-          </div>
-          <Button
-            variant="outline"
-            className="transition duration-300 font-bold p-6 w-full"
-          >
-            <GoogleIcon /> Continue With Google
-          </Button> */}
         </CardContent>
       </form>
+      <CardFooter>
+        <p>
+          New user?{" "}
+          <Link to="/register" className="underline">
+            Register
+          </Link>{" "}
+          now.
+        </p>
+      </CardFooter>
     </Card>
   );
 }

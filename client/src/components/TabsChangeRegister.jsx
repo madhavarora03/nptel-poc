@@ -1,16 +1,13 @@
 import RegisterForm from "@/components/RegisterForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import axios from "axios";
 import { useToast } from "./ui/use-toast";
+import axiosInstance from "@/lib/axiosConfig";
 export default function TabsChange() {
   const { toast } = useToast();
   const studentRegisterHandler = async (data) => {
     console.log(data);
     try {
-      const res = await axios.post(
-        "http://localhost:5000/student/register",
-        data
-      );
+      const res = await axiosInstance.post("/student/register", data);
       console.log(res);
     } catch (error) {
       toast;
@@ -18,10 +15,7 @@ export default function TabsChange() {
   };
 
   const teacherRegisterHandler = async (data) => {
-    const res = await axios.post(
-      "http://localhost:5000/teacher/register",
-      data
-    );
+    const res = await axiosInstance.post("/teacher/register", data);
     console.log(res);
   };
 

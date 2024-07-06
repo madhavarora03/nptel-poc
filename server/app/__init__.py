@@ -23,12 +23,20 @@ from app.teacher import bp as teacher_bp
 
 app.register_blueprint(teacher_bp, url_prefix="/teacher")
 
+from app.subject import bp as subject_bp
+
+app.register_blueprint(subject_bp, url_prefix="/subject")
+
+from app.upload import bp as upload_bp
+
+app.register_blueprint(upload_bp, url_prefix="/upload")
+
 
 @app.route("/current-user", methods=["GET"])
 @jwt_required()
 def get_current_user():
     current_user = get_jwt_identity()
-    print(current_user)
+    print("Current User: ", current_user)
 
     if current_user["role"] == "student":
         return jsonify(

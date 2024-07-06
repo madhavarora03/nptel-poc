@@ -24,13 +24,9 @@ def extract_link(pdf_path, page_number):
     output_image_path = "qr_code_image.png"
     extract_qr_code(pdf_path, page_number, output_image_path)
     qr_code_data = decode_qr_code(output_image_path)
-    print("Decoded QR Code Data:", qr_code_data)
-    return qr_code_data
 
-
-def extract_text(pdf_path):
-    text = ""
-    with pdfplumber.open(pdf_path) as pdf:
-        for page in pdf.pages:
-            text += page.extract_text()
-    return text
+    if qr_code_data and qr_code_data.startswith("https://nptel.ac.in/"):
+        print("Decoded QR Code Data:", qr_code_data)
+        return qr_code_data
+    print("| Not Valid QR CODE DATA |")
+    return None

@@ -1,8 +1,24 @@
 import os
 from app.utils.extractor import extractor
+from app.models import StudentSubject
+from app.models import StudentSubject, Subject
+from app.extensions import db
+from app import app
 
 
-def verify_file(file_name):
+def update_status_to_not_verified(student_subject_id):
+    with app.app_context():
+        student_subject = StudentSubject.query.filter_by(id=student_subject_id).first()
+        if student_subject:
+            student_subject.status = "not_verified"
+            db.session.commit()
+
+
+def verify_file(file_name, student_subject_id, current_user_name, subject_code):
+
+    with app.app_context():
+        subject = Subject.query.filter_by(subject_code=subject_code).first()
+        subject_name = subject.subject_name
     (
         uploaded_course_name,
         uploaded_student_name,
@@ -14,19 +30,28 @@ def verify_file(file_name):
         extractor("./downloads/" + file_name)
     )
 
-    if uploaded_course_name != valid_course_name:
-        return "Course name mismatch", 500
+    os.remove("./downloads/" + file_name)
+    os.remove("qr_code_image.png")
 
-    if uploaded_student_name != valid_student_name:
-        return "Student name mismatch", 500
+    if (uploaded_course_name != valid_course_name) or (
+        uploaded_course_name != subject_name
+    ):
+        update_status_to_not_verified(student_subject_id)
+        return "Course name mismatch", 500, None, None
+
+    if (uploaded_student_name != valid_student_name) or (
+        uploaded_student_name != current_user_name
+    ):
+        update_status_to_not_verified(student_subject_id)
+        return "Student name mismatch", 500, None, None
 
     if uploaded_total_marks != valid_total_marks:
-        return "Total marks mismatch", 500
+        update_status_to_not_verified(student_subject_id)
+        return "Total marks mismatch", 500, None, None
 
     if uploaded_roll_number != valid_roll_number:
-        return "Roll number mismatch", 500
-
-    os.remove("./downloads/" + file_name)
+        update_status_to_not_verified(student_subject_id)
+        return "Roll number mismatch", 500, None, None
 
     return (
         "Verification successful",

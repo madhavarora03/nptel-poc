@@ -27,7 +27,7 @@ def download_verification_pdf(qr_code_link, file_name):
             print(f"Extracted PDF URL: {pdf_url}")
         except Exception as e:
             print(f"Error finding the 'Course Certificate' button: {e}")
-            print(driver.page_source)
+            print("Driver page source: ", driver.page_source)
             return "Error finding the 'Course Certificate' button", 500
 
         pdf_response = requests.get(pdf_url)

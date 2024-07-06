@@ -29,10 +29,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password, role) => {
-    const url =
-      role === "student"
-        ? "http://localhost:5000/student/login"
-        : "http://localhost:5000/teacher/login";
+    const url = `http://localhost:5000/${role}/login`;
     const response = await axios.post(url, { email, password });
     const { access_token } = response.data;
     localStorage.setItem("token", access_token);

@@ -6,29 +6,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Check, Upload, X } from "lucide-react";
+import { Check, Timer, Upload, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import NptelUpload from "./NptelUpload";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "@/lib/axiosConfig";
 
 export default function CompletedRequest() {
   const [data, setData] = useState([]);
-  // TODO: Fetch data from api
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/request/${subject_code}"
-        );
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
 
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axiosInstance.get("/student/completed");
+      console.log(res.data);
+      setData(res.data.student_subjects);
+    }
     fetchData();
-  }, [subject_code]);
+  }, []);
 
   return (
     <Table>
@@ -61,6 +55,8 @@ export default function CompletedRequest() {
                 <TableCell className="flex items-center justify-center w-full">
                   {status === "verified" ? (
                     <Check className="text-green-500" />
+                  ) : status === "processing" ? (
+                    <Timer className="text-blue-500" />
                   ) : (
                     <X className="text-red-500" />
                   )}
@@ -68,7 +64,7 @@ export default function CompletedRequest() {
                 <TableCell className="text-center">{submitted_on}</TableCell>
                 <TableCell className="text-center">{due_date}</TableCell>
                 <TableCell className="flex items-center justify-center w-full">
-                  {status !== "verified" ? (
+                  {status === "not_verified" ? (
                     <Dialog>
                       <DialogTitle></DialogTitle>
                       <DialogTrigger>

@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
-import axios from "axios";
 import { Button } from "./ui/button";
 import { useToast } from "@/components/ui/use-toast";
-// import { studentData } from "@/lib/student-data";
+import axiosInstance from "@/lib/axiosConfig";
 
 // eslint-disable-next-line react/prop-types
 export default function NptelUpload({ subjectCode }) {
@@ -33,9 +32,8 @@ export default function NptelUpload({ subjectCode }) {
     setIsLoading(true);
 
     try {
-      // TODO: POST data to backend
-      const response = await axios.post(
-        "http://localhost:5000/upload",
+      const response = await axiosInstance.post(
+        `/upload?subject_code=${subjectCode}`,
         formData,
         {
           headers: {
@@ -55,7 +53,7 @@ export default function NptelUpload({ subjectCode }) {
     } catch (error) {
       toast({
         title: "Error uploading file",
-        description: error.message,
+        description: error.response.data.message,
         variant: "destructive",
       });
       console.error("Error uploading file:", error);
