@@ -44,6 +44,7 @@ def get_current_user():
                 "email": current_user["email"],
                 "role": current_user["role"],
                 "student_id": current_user["student_id"],
+                "name": current_user["name"],
             }
         )
     return jsonify(
@@ -51,5 +52,6 @@ def get_current_user():
             "email": current_user["email"],
             "role": current_user["role"],
             "teacher_id": current_user["teacher_id"],
+            "name": current_user["name"],
         }
     )

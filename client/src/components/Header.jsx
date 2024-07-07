@@ -1,14 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import useAuth from "@/context/AuthContext";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
+
+  const menu = useRef(null);
   const navigate = useNavigate();
 
-  const { logout } = useAuth();
+  const { user, loading, logout } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/auth");
+    }
+  }, [loading, user, navigate]);
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (menu.current && !menu.current.contains(e.target)) {
+        setToggleMenu(false);
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,15 +56,41 @@ export default function Header() {
       }`}
     >
       <Logo />
-      <Button
-        variant="destructive"
-        onClick={() => {
-          logout();
-          navigate("/auth");
-        }}
-      >
-        Logout
-      </Button>
+      <div className="relative" ref={menu}>
+        <Button
+          variant="ghost"
+          className="hover:bg-blue-700 hover:text-accent space-x-2"
+          onClick={() => {
+            setToggleMenu(!toggleMenu);
+            console.log(toggleMenu);
+          }}
+        >
+          <span>{user ? user.name : ""}</span>
+          <ChevronDown
+            className={`h-5 transition-transform duration-300 ${
+              toggleMenu ? "-rotate-180" : ""
+            }`}
+          />
+        </Button>
+        <div
+          className={`absolute bg-slate-800 w-40 rounded-md transition-all ease-in-out duration-300 py-[2px] px-[2px] -right-2 mt-2 ${
+            toggleMenu
+              ? "top-10 opacity-100"
+              : "top-7 opacity-0 pointer-events-none"
+          }`}
+        >
+          <Button
+            variant="destructive"
+            onClick={() => {
+              logout();
+              navigate("/auth");
+            }}
+            className="w-full"
+          >
+            Logout
+          </Button>
+        </div>
+      </div>
     </header>
   );
 }
