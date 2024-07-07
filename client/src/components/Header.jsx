@@ -57,13 +57,9 @@ export default function Header() {
     >
       <Logo />
       <div className="relative" ref={menu}>
-        <Button
-          variant="ghost"
-          className="hover:bg-blue-700 hover:text-accent space-x-2"
-          onClick={() => {
-            setToggleMenu(!toggleMenu);
-            console.log(toggleMenu);
-          }}
+        <div
+          className="hover:bg-blue-700 hover:text-accent space-x-2 flex items-center justify-center px-4 py-3 hover:cursor-pointer rounded-lg transition-colors duration-300"
+          onClick={() => setToggleMenu(!toggleMenu)}
         >
           <span>{user ? user.name : ""}</span>
           <ChevronDown
@@ -71,9 +67,9 @@ export default function Header() {
               toggleMenu ? "-rotate-180" : ""
             }`}
           />
-        </Button>
+        </div>
         <div
-          className={`absolute bg-slate-800 w-40 rounded-md transition-all ease-in-out duration-300 py-[2px] px-[2px] -right-2 mt-2 ${
+          className={`absolute bg-slate-800 w-40 rounded-md transition-all ease-in-out duration-300 py-[2px] px-[2px] -right-1 mt-4 ${
             toggleMenu
               ? "top-10 opacity-100"
               : "top-7 opacity-0 pointer-events-none"
