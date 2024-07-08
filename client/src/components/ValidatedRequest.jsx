@@ -38,6 +38,7 @@ export default function ValidatedRequest() {
           <TableHead className="text-center">Total Marks</TableHead>
           <TableHead className="text-center">Result</TableHead>
           <TableHead className="text-center">Status</TableHead>
+          <TableHead className="text-center">Remarks</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

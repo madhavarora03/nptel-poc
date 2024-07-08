@@ -34,13 +34,13 @@ export default function TabsChange() {
     <Tabs defaultValue="student" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2 bg-secondary-foreground/30 text-accent">
         <TabsTrigger value="student">Student</TabsTrigger>
-        <TabsTrigger value="teacher">Teacher</TabsTrigger>
+        <TabsTrigger value="teacher">Faculty</TabsTrigger>
       </TabsList>
       <TabsContent value="student">
         <LoginForm description="Login as Student" onSubmit={studentLogin} />
       </TabsContent>
       <TabsContent value="teacher">
-        <LoginForm description="Login as Teacher" onSubmit={teacherLogin} />
+        <LoginForm description="Login as Faculty" onSubmit={teacherLogin} />
       </TabsContent>
     </Tabs>
   );

@@ -50,6 +50,8 @@ class StudentSubject(db.Model):
 
     total_marks = db.Column(db.Integer)
 
+    remark = db.Column(db.String, default="")
+
     student = db.relationship(
         "Student", backref=db.backref("student_subjects", lazy=True)
     )

@@ -23,7 +23,7 @@ export default function TabsChange() {
     <Tabs defaultValue="student" className="w-[400px] z-10">
       <TabsList className="grid w-full grid-cols-2 bg-secondary-foreground/30 text-accent">
         <TabsTrigger value="student">Student</TabsTrigger>
-        <TabsTrigger value="teacher">Teacher</TabsTrigger>
+        <TabsTrigger value="teacher">Faculty</TabsTrigger>
       </TabsList>
       <TabsContent value="student">
         <RegisterForm
@@ -47,8 +47,13 @@ export default function TabsChange() {
       </TabsContent>
       <TabsContent value="teacher">
         <RegisterForm
-          description="Register as Teacher"
+          description="Register as Faculty"
           fields={[
+            {
+              name: "salutation",
+              placeholder: "Salutation",
+              select: "true",
+            },
             {
               name: "name",
               placeholder: "Name",
@@ -59,7 +64,7 @@ export default function TabsChange() {
             },
             {
               name: "teacher_id",
-              placeholder: "Teacher ID",
+              placeholder: "Faculty ID",
             },
           ]}
           onSubmit={teacherRegisterHandler}

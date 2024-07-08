@@ -33,14 +33,14 @@ def verify_file(file_name, student_subject_id, current_user_name, subject_code):
     os.remove("./downloads/" + file_name)
     os.remove("qr_code_image.png")
 
-    if (uploaded_course_name != valid_course_name) or (
-        uploaded_course_name != subject_name
+    if (uploaded_course_name.lower() != valid_course_name.lower()) or (
+        uploaded_course_name.lower() != subject_name.lower()
     ):
         update_status_to_not_verified(student_subject_id)
         return "Course name mismatch", 500, None, None
 
-    if (uploaded_student_name != valid_student_name) or (
-        uploaded_student_name != current_user_name
+    if (uploaded_student_name.lower() != valid_student_name.lower()) or (
+        uploaded_student_name.lower() != current_user_name.lower()
     ):
         update_status_to_not_verified(student_subject_id)
         return "Student name mismatch", 500, None, None

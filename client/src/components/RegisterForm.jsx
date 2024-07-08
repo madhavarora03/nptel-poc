@@ -12,6 +12,13 @@ import {
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 // eslint-disable-next-line react/prop-types
 export default function LoginForm({ onSubmit, description, fields }) {
@@ -28,15 +35,29 @@ export default function LoginForm({ onSubmit, description, fields }) {
       <form onSubmit={handleSubmit(onSubmit)} method="POST">
         <CardContent className="space-y-6">
           {/* eslint-disable-next-line react/prop-types */}
-          {fields.map(({ name, placeholder }, index) => (
-            <Input
-              key={index}
-              type="text"
-              name={name}
-              placeholder={placeholder}
-              {...register(name, { required: true })}
-            />
-          ))}
+          {fields.map(({ name, placeholder, select }, index) =>
+            !select ? (
+              <Input
+                key={index}
+                type="text"
+                name={name}
+                placeholder={placeholder}
+                {...register(name, { required: true })}
+              />
+            ) : 
+            <Select key={index}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Salutation..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Dr">Dr</SelectItem>
+                <SelectItem value="Professor">Professor</SelectItem>
+                <SelectItem value="Mr">Mr</SelectItem>
+                <SelectItem value="Mrs">Mrs</SelectItem>
+                <SelectItem value="Miss">Miss</SelectItem>
+              </SelectContent>
+             </Select>
+          )}
           <div className="w-full flex space-x-2 items-center">
             <Input
               type={PassVisible ? "text" : "password"}
