@@ -35,29 +35,30 @@ export default function LoginForm({ onSubmit, description, fields }) {
       <form onSubmit={handleSubmit(onSubmit)} method="POST">
         <CardContent className="space-y-6">
           {/* eslint-disable-next-line react/prop-types */}
-          {fields.map(({ name, placeholder, select }, index) =>
-            !select ? (
+          {fields.map(({ name, placeholder, select }, index) => (
+            <div key={index} className="flex space-x-2">
+              {/* {name === "name" && select && (
+                <Select>
+                  <SelectTrigger className="w-[100px]">
+                    <SelectValue placeholder="Salutation..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Dr">Dr</SelectItem>
+                    <SelectItem value="Professor">Professor</SelectItem>
+                    <SelectItem value="Mr">Mr</SelectItem>
+                    <SelectItem value="Mrs">Mrs</SelectItem>
+                    <SelectItem value="Miss">Miss</SelectItem>
+                  </SelectContent>
+                </Select>
+              )} */}
               <Input
-                key={index}
                 type="text"
                 name={name}
                 placeholder={placeholder}
                 {...register(name, { required: true })}
               />
-            ) : 
-            <Select key={index}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Salutation..." />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Dr">Dr</SelectItem>
-                <SelectItem value="Professor">Professor</SelectItem>
-                <SelectItem value="Mr">Mr</SelectItem>
-                <SelectItem value="Mrs">Mrs</SelectItem>
-                <SelectItem value="Miss">Miss</SelectItem>
-              </SelectContent>
-             </Select>
-          )}
+            </div>
+          ))}
           <div className="w-full flex space-x-2 items-center">
             <Input
               type={PassVisible ? "text" : "password"}
@@ -78,7 +79,7 @@ export default function LoginForm({ onSubmit, description, fields }) {
               type={ConfirmVisible ? "text" : "password"}
               name="confirm_password"
               placeholder="Confirm Password"
-              {...register("password", { required: true })}
+              {...register("confirm_password", { required: true })}
             />
             <Button
               type="button"

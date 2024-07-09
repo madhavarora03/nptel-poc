@@ -51,6 +51,7 @@ export default function ValidatedRequest() {
               total_marks,
               result,
               status,
+              remark,
             },
             index
           ) => {
@@ -78,6 +79,7 @@ export default function ValidatedRequest() {
                     <Timer className="text-blue-500 h-8 w-auto" />
                   )}
                 </TableCell>
+                <TableCell className="text-center">{remark || "-"}</TableCell>
               </TableRow>
             );
           }

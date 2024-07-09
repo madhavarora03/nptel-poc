@@ -124,6 +124,7 @@ def get_student_requests(subject_code):
             "student_nsut_roll_number": ss.student.nsut_roll_number,
             "nptel_roll_number": ss.nptel_roll_number,
             "total_marks": ss.total_marks,
+            "remark": ss.remark,
             "result": ss.result,
             "status": ss.status,
         }

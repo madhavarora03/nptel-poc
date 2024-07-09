@@ -15,6 +15,14 @@ def update_status_to_not_verified(student_subject_id):
             db.session.commit()
 
 
+def update_remark(student_subject_id, remark):
+    with app.app_context():
+        student_subject = StudentSubject.query.filter_by(id=student_subject_id).first()
+        if student_subject:
+            student_subject.remark = remark
+            db.session.commit()
+
+
 def process_file_async(file_path, student_subject_id, current_user_name, subject_code):
     with app.app_context():
         upload = Upload(
@@ -30,6 +38,8 @@ def process_file_async(file_path, student_subject_id, current_user_name, subject
     if verification_link is None:
         print("----- Invalid PDF Uploaded -----")
         update_status_to_not_verified(student_subject_id)
+        update_remark(student_subject_id, "Invalid PDF uploaded")
+
         return
 
     print("Verification Link:", verification_link)
@@ -41,6 +51,7 @@ def process_file_async(file_path, student_subject_id, current_user_name, subject
     if download_status == 500:
         print("----- Failed to download the PDF ------")
         update_status_to_not_verified(student_subject_id)
+        update_remark(student_subject_id, "Failed to download the verification PDF")
         return
 
     verification_status, _, nptel_roll_number, total_marks = verify(
@@ -57,8 +68,10 @@ def process_file_async(file_path, student_subject_id, current_user_name, subject
                 )
                 student_subject.nptel_roll_number = nptel_roll_number
                 student_subject.total_marks = int(total_marks)
+                update_remark(student_subject_id, verification_status)
             else:
                 student_subject.status = "not_verified"
+                update_remark(student_subject_id, verification_status)
 
             db.session.commit()
 

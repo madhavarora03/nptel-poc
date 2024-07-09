@@ -12,6 +12,10 @@ def extractor(pdf_path):
     text = extract_text_from_first_page(pdf_path)
     lines = text.splitlines()
 
+    if len(lines) != 12:
+        print("PDF is invalid / has been tampered with")
+        return None, None, None, None
+
     print("Extracted lines:")
     for i, line in enumerate(lines):
         print(f"Line {i}: {line}")
@@ -22,10 +26,6 @@ def extractor(pdf_path):
     exam_marks = lines[8].strip()
     total_marks = lines[9].strip()
     roll_no = lines[11].strip()
-
-    if len(lines) != 12:
-        print("Invalid PDF")
-        return None
 
     return (
         course_name,

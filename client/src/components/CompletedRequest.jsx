@@ -32,6 +32,7 @@ export default function CompletedRequest() {
           <TableHead className="text-center">Subject Name</TableHead>
           <TableHead className="text-center">Coordinater</TableHead>
           <TableHead className="text-center">Status</TableHead>
+          <TableHead className="text-center">Remarks</TableHead>
           <TableHead className="text-center">Submitted On</TableHead>
           <TableHead className="text-center">Due Date</TableHead>
           <TableHead className="text-center">Reupload Certificate</TableHead>
@@ -44,6 +45,7 @@ export default function CompletedRequest() {
             subject_name,
             coordinator,
             status,
+            remark,
             submitted_on,
             due_date,
           }) => {
@@ -61,6 +63,7 @@ export default function CompletedRequest() {
                     <X className="text-red-500" />
                   )}
                 </TableCell>
+                <TableCell className="text-center">{remark || "-"}</TableCell>
                 <TableCell className="text-center">{submitted_on}</TableCell>
                 <TableCell className="text-center">{due_date}</TableCell>
                 <TableCell className="flex items-center justify-center w-full">

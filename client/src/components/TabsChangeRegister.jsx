@@ -2,21 +2,49 @@ import RegisterForm from "@/components/RegisterForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "./ui/use-toast";
 import axiosInstance from "@/lib/axiosConfig";
+import { useNavigate } from "react-router-dom";
+
 export default function TabsChange() {
   const { toast } = useToast();
+  const navigate = useNavigate();
+
   const studentRegisterHandler = async (data) => {
     console.log(data);
     try {
       const res = await axiosInstance.post("/student/register", data);
       console.log(res);
+      toast({
+        title: "Success",
+        description: "Student registered successfully",
+      });
+
+      navigate("/auth");
     } catch (error) {
-      toast;
+      toast({
+        title: "Error",
+        description: error.response.data.message,
+        variant: "destructive",
+      });
     }
   };
 
   const teacherRegisterHandler = async (data) => {
-    const res = await axiosInstance.post("/teacher/register", data);
-    console.log(res);
+    try {
+      const res = await axiosInstance.post("/teacher/register", data);
+      console.log(res);
+      toast({
+        title: "Success",
+        description: "Faculty registered successfully",
+      });
+
+      navigate("/auth");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.response.data.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -50,13 +78,9 @@ export default function TabsChange() {
           description="Register as Faculty"
           fields={[
             {
-              name: "salutation",
-              placeholder: "Salutation",
-              select: "true",
-            },
-            {
               name: "name",
               placeholder: "Name",
+              select: true,
             },
             {
               name: "email",

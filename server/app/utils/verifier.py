@@ -33,6 +33,14 @@ def verify_file(file_name, student_subject_id, current_user_name, subject_code):
     os.remove("./downloads/" + file_name)
     os.remove("qr_code_image.png")
 
+    if (
+        uploaded_course_name == None
+        or uploaded_student_name == None
+        or uploaded_total_marks == None
+        or uploaded_roll_number == None
+    ):
+        return "Invalid PDF uploaded", 500, None, None
+
     if (uploaded_course_name.lower() != valid_course_name.lower()) or (
         uploaded_course_name.lower() != subject_name.lower()
     ):

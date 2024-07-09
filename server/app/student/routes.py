@@ -123,6 +123,7 @@ def get_completed_requests():
                 "subject_name": subject.subject_name,
                 "coordinator": teacher.name,
                 "status": student_subject.status,
+                "remark": student_subject.remark,
                 "submitted_on": (
                     upload.timestamp.strftime("%d/%m/%Y") if upload else None
                 ),
