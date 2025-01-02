@@ -9,6 +9,9 @@ import os
 
 
 def download_verification_pdf(qr_code_link, file_name):
+    print(file_name)
+    file_name = os.path.basename(file_name)
+    print(file_name)
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service)
 
@@ -31,9 +34,11 @@ def download_verification_pdf(qr_code_link, file_name):
             return "Error finding the 'Course Certificate' button", 500
 
         pdf_response = requests.get(pdf_url)
+    
         if pdf_response.status_code == 200:
             local_folder = "downloads"
-
+            file_name = file_name.replace("uploads\\", "")
+            print(file_name)
             if not os.path.exists(local_folder):
                 os.makedirs(local_folder)
 

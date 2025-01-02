@@ -15,7 +15,7 @@ def update_status_to_not_verified(student_subject_id):
 
 
 def verify_file(file_name, student_subject_id, current_user_name, subject_code):
-
+    file_name = os.path.basename(file_name)
     with app.app_context():
         subject = Subject.query.filter_by(subject_code=subject_code).first()
         subject_name = subject.subject_name
